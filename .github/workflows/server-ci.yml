@@ -25,10 +25,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Lint
-        run: |
-          cd apps/server
-          npm run lint:ci
+        working-directory: apps/server
+        run: pnpm run lint:ci
       - name: Run tests
-        run: |
-          cd apps/server
-          npm test
+        working-directory: apps/server
+        run: pnpm test
