@@ -27,8 +27,9 @@ jobs:
       - name: Lint
         working-directory: apps/server
         run: pnpm run lint:ci
-      - name: Run tests
-        working-directory: apps/server
-        run: pnpm test
       - name: Jest coverage report
         uses: ArtiomTr/jest-coverage-report-action@v2.2.4
+        with:
+          working-directory: apps/server
+          package-manager: pnpm
+          test-script: pnpm test
