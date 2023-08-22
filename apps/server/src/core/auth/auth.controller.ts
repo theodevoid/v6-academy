@@ -3,6 +3,7 @@ import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
 import { User } from '~/core/user/user.decorator';
 import { User as UserModel } from '@prisma/client';
+import { RegisterUserDTO } from './dto/register-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -15,7 +16,7 @@ export class AuthController {
   }
 
   @Post('/register')
-  async register(@Body() userRegisterDTO: { email: string; password: string }) {
+  async register(@Body() userRegisterDTO: RegisterUserDTO) {
     const user = await this.authService.register(userRegisterDTO);
 
     return user;
