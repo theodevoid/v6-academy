@@ -23,7 +23,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup pnpm
       uses: pnpm/action-setup@v2.4.0
-    - run: cd apps/server
-    - run: pnpm run lint:ci
-    - run: pnpm run build --if-present
-    - run: pnpm test
+    - run: |
+        cd apps/server
+        npm run lint:ci
+    - run: |
+        cd apps/server
+        npm test
