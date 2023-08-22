@@ -3,10 +3,6 @@
 
 name: Node.js CI
 
-permissions:
-  checks: write
-  pull-requests: write
-
 on:
   push:
     branches: ['main']
@@ -20,7 +16,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v3
@@ -31,9 +26,6 @@ jobs:
       - name: Lint
         working-directory: apps/server
         run: pnpm run lint:ci
-      - name: Jest coverage report
-        uses: ArtiomTr/jest-coverage-report-action@v2.2.4
-        with:
-          working-directory: apps/server
-          package-manager: pnpm
-          test-script: pnpm test
+      - name: Run tests
+        working-directory: apps/server
+        run: pnpm run test
