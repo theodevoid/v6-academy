@@ -5,13 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,14 +19,16 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v2.4.0
-    - name: Install dependencies
-      run: pnpm install
-    - run: |
-        cd apps/server
-        npm run lint:ci
-    - run: |
-        cd apps/server
-        npm test
+      - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.4.0
+      - name: Install dependencies
+        run: pnpm install
+      - name: Lint
+        run: |
+          cd apps/server
+          npm run lint:ci
+      - name: Run tests
+        run: |
+          cd apps/server
+          npm test
