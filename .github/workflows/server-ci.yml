@@ -5,25 +5,31 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v2.4.0
-    - run: cd apps/server
-    - run: pnpm run lint:ci
-    - run: pnpm run build --if-present
-    - run: pnpm test
+      - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.4.0
+      - name: Install dependencies
+        run: pnpm install
+      - name: Lint
+        working-directory: apps/server
+        run: pnpm run lint:ci
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2.2.4
+        with:
+          working-directory: apps/server
+          package-manager: pnpm
+          test-script: pnpm test

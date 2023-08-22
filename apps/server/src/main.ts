@@ -11,7 +11,7 @@ async function bootstrap() {
     origin: ['http://localhost:3000'],
   });
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   await app.listen(2000);
 }
