@@ -23,6 +23,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup pnpm
       uses: pnpm/action-setup@v2.4.0
+    - name: Install dependencies
+      run: pnpm install
     - run: |
         cd apps/server
         npm run lint:ci
