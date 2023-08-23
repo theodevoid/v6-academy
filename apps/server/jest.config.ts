@@ -16,7 +16,7 @@ const jestConfig: JestConfigWithTsJest = {
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
   collectCoverage: true,
-  coveragePathIgnorePatterns: ['^app$', '^prisma$'],
+  coveragePathIgnorePatterns: ['prisma.service.ts'],
   coverageThreshold: {
     global: {
       lines: 80,
