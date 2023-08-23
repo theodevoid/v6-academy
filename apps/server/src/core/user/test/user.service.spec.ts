@@ -1,7 +1,8 @@
-import { PrismaService } from '~/lib/prisma.service';
-import { UserService } from '../user.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
+import { PrismaService } from '~/lib/prisma.service';
+import { UserService } from '../user.service';
 import { oneUserMockData, userMockData } from './fixtures';
 
 const mockUserPrismaMethods = {

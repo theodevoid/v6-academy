@@ -4,10 +4,11 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { UserService } from '~/core/user/user.service';
-import { compare, hash } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Prisma, User } from '@prisma/client';
+import { compare, hash } from 'bcrypt';
+
+import { UserService } from '~/core/user/user.service';
 import { config } from '~/config';
 
 @Injectable()
@@ -34,7 +35,7 @@ export class AuthService {
     return result;
   }
 
-  public async login(user: Omit<User, 'password'>) {
+  public async login(user: Pick<User, 'email' | 'id'>) {
     const payload = { email: user.email, sub: user.id };
 
     return {
@@ -55,7 +56,8 @@ export class AuthService {
 
     const hashedPassword = await hash(user.password, config.bcryptSaltRounds);
 
-    const newUser = await this.userService.createUser({
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...newUser } = await this.userService.createUser({
       email: user.email,
       password: hashedPassword,
     });
