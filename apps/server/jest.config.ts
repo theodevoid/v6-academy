@@ -17,6 +17,11 @@ const jestConfig: JestConfigWithTsJest = {
   testEnvironment: 'node',
   collectCoverage: true,
   coveragePathIgnorePatterns: ['^app$', '^prisma$'],
+  coverageThreshold: {
+    global: {
+      lines: 80,
+    },
+  },
 };
 
 export default jestConfig;
