@@ -7,7 +7,7 @@ export const SearchBar = () => {
   return (
     <div>
       <div className="flex">
-        <Button variant="link" className="mr-4 font-extrabold font-heading">
+        <Button variant="link" className="mr-4 font-heading font-extrabold">
           V6 Academy
         </Button>
         <Input className=" rounded-e-none px-6" />

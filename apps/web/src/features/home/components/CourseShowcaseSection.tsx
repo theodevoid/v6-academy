@@ -5,10 +5,10 @@ import { CourseCard } from '~/features/course';
 export const CourseShowCaseSection = () => {
   return (
     <div className="mt-8">
-      <h3 className="text-xl font-heading font-semibold">
-        Check out these popular courses
+      <h3 className="font-heading text-xl font-semibold">
+        Nih, course recommended buat lo!
       </h3>
-      <div className="flex flex-col gap-8 mt-4">
+      <div className="mt-4 grid grid-cols-1 gap-8 md:grid-cols-2">
         <CourseCard
           author="Sandhika Galih (WPU)"
           coverImageUrl="https://cdn.discordapp.com/attachments/1050790741334569091/1144315130507710474/react_wpu.jpg"

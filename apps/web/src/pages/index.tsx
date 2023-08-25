@@ -1,10 +1,13 @@
-import { CourseShowCaseSection, SearchBar } from '~/features/home';
+import { CourseShowCaseSection, HeroSection, SearchBar } from '~/features/home';
 
 export default function Home() {
   return (
-    <div className="container max-w-screen-md my-8">
-      <SearchBar />
-      <CourseShowCaseSection />
-    </div>
+    <>
+      <main className="container my-8 max-w-screen-md px-4">
+        <SearchBar />
+        <HeroSection />
+        <CourseShowCaseSection />
+      </main>
+    </>
   );
 }

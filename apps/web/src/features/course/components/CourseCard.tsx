@@ -27,7 +27,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         <Image fill src={coverImageUrl} alt={title} className="rounded-md" />
       </AspectRatio>
       <p className="mt-1.5 font-semibold">{title}</p>
-      <p className="text-sm text-muted-foreground font-semibold">{author}</p>
+      <p className="text-sm font-semibold text-muted-foreground">{author}</p>
       <p className="text-sm text-muted-foreground">
         {unitCount} Unit{unitCount > 1 && 's'} •{' '}
         {format(createdDate, 'MMMM yyyy')}

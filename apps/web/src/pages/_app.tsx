@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { Inter, Poppins } from 'next/font/google';
 import Head from 'next/head';
 
+import { Footer } from '~/components/Footer';
 import { ThemeProvider } from '~/components/theme-provider';
 
 const poppins = Poppins({
@@ -23,8 +24,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>V6 Academy - Learn to Code the Practical Way</title>
       </Head>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
     </main>
   );
