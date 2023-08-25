@@ -2,7 +2,11 @@
   "singleQuote": true,
   "trailingComma": "all",
   "endOfLine": "auto",
-  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindConfig": "./apps/web/tailwind.config.ts",
   "importOrder": [
     "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",
     "^(next/(.*)$)|^(next$)",
@@ -17,5 +21,5 @@
     "^~/(.*)$",
     "^[./]"
   ],
-  "importOrderParserPlugins": ["typescript", "decorators-legacy"]
+  "importOrderParserPlugins": ["typescript", "decorators-legacy", "jsx"]
 }
