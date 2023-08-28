@@ -42,6 +42,7 @@ export const MaterialsListItem: React.FC<MaterialsListItemProps> = ({
       </CollapsibleTrigger>
       <CollapsibleContent className="text-sm">
         <MaterialsListItemTopic
+          courseSlug="course-slug"
           slug="test-slug-var"
           title="Using the `var` keyword"
           type="VIDEO"
