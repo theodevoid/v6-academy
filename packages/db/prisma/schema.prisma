@@ -30,6 +30,7 @@ model Course {
   categoryId Int
   Unit       Unit[]
   createdAt  DateTime @default(now())
+  slug       String   @unique
 }
 
 model Unit {
@@ -38,15 +39,23 @@ model Unit {
   course    Course   @relation(fields: [courseId], references: [id])
   courseId  Int
   createdAt DateTime @default(now())
+  slug      String   @unique
 }
 
 model Topic {
-  id                      Int      @id @default(autoincrement())
+  id                      Int       @id @default(autoincrement())
   title                   String
   videoUrl                String?
   description             String?
   writtenMaterialMarkdown String?
-  createdAt               DateTime @default(now())
+  createdAt               DateTime  @default(now())
+  slug                    String    @unique
+  type                    TopicType @default(VIDEO)
+}
+
+enum TopicType {
+  VIDEO
+  TEXT
 }
 
 model Comment {

@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prestart": "npx prisma migrate deploy",
-    "predev": "npx prisma migrate dev",
+    "predev": "npm run build --prefix ../../packages/db && npx prisma migrate dev && npx prisma generate",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "@nestjs/passport": "^10.0.1",
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "5.1.1",
+    "@v6-academy/db": "*",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",

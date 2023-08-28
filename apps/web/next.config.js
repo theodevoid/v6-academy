@@ -9,6 +9,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ['@v6-academy/db'],
 };
 
 module.exports = nextConfig;
