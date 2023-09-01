@@ -1,13 +1,16 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
+import { GetTopicsDTO } from '@v6-academy/dto';
 
 import { TopicService } from './topic.service';
 
-@Controller('unit')
+@Controller('topics')
 export class TopicController {
-  constructor(private readonly unitService: TopicService) {}
+  constructor(private readonly topicService: TopicService) {}
 
-  @Get('/:id')
-  public async getUnit(@Param('id') unitId: number) {
-    return unitId;
+  @Get('/')
+  public async getTopics(@Query() getTopicsDTO: GetTopicsDTO) {
+    const topics = await this.topicService.getTopics(getTopicsDTO);
+
+    return topics;
   }
 }

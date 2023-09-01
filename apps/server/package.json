@@ -32,6 +32,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "5.1.1",
     "@v6-academy/db": "*",
+    "@v6-academy/dto": "^1.0.0",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",

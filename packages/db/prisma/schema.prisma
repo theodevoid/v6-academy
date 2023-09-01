@@ -14,13 +14,13 @@ model User {
   id        Int       @id @default(autoincrement())
   email     String    @unique
   password  String
-  Comment   Comment[]
+  comments  Comment[]
   createdAt DateTime  @default(now())
 }
 
 model Category {
-  id     Int      @id @default(autoincrement())
-  Course Course[]
+  id      Int      @id @default(autoincrement())
+  courses Course[]
 }
 
 model Course {
@@ -28,7 +28,7 @@ model Course {
   name       String
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
-  Unit       Unit[]
+  units      Unit[]
   createdAt  DateTime @default(now())
   slug       String   @unique
 }
@@ -40,6 +40,7 @@ model Unit {
   courseId  Int
   createdAt DateTime @default(now())
   slug      String   @unique
+  topics    Topic[]
 }
 
 model Topic {
@@ -51,6 +52,8 @@ model Topic {
   createdAt               DateTime  @default(now())
   slug                    String    @unique
   type                    TopicType @default(VIDEO)
+  unit                    Unit?     @relation(fields: [unitId], references: [id])
+  unitId                  Int?
 }
 
 enum TopicType {
