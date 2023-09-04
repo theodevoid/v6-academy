@@ -8,11 +8,11 @@ const jestConfig: JestConfigWithTsJest = {
   },
   moduleFileExtensions: ['js', 'json', 'ts'],
   rootDir: 'src',
-  testRegex: '.*\\.spec\\.ts$',
+  testRegex: ['.*\\.spec\\.ts$', '.int-spec.ts$'],
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  collectCoverageFrom: ['**/*.service.(t|j)s', '**/*.controller.(t|j)s'],
+  collectCoverageFrom: ['**/*.service.(t|j)s'],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
   collectCoverage: true,

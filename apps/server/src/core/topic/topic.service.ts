@@ -10,9 +10,9 @@ export class TopicService {
   public async getTopics(getTopicsDTO: GetTopicsDTO) {
     const topics = await this.prismaService.topic.findMany({
       where: {
-        slug: getTopicsDTO.slug,
+        slug: getTopicsDTO.slug || undefined,
       },
-      select: {
+      include: {
         unit: {
           include: {
             course: true,
