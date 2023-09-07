@@ -10,12 +10,20 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   async cleanDatabase() {
     if (process.env.NODE_ENV === 'production') return;
 
-    return Promise.all([
-      this.comment.deleteMany(),
-      this.category.deleteMany(),
-      this.topic.deleteMany(),
-      this.unit.deleteMany(),
-      this.user.deleteMany(),
-    ]);
+    const tablenames = await this.$queryRaw<
+      Array<{ tablename: string }>
+    >`SELECT tablename FROM pg_tables WHERE schemaname='public'`;
+
+    const tables = tablenames
+      .map(({ tablename }) => tablename)
+      .filter((name) => name !== '_prisma_migrations')
+      .map((name) => `"public"."${name}"`)
+      .join(', ');
+
+    try {
+      await this.$executeRawUnsafe(`TRUNCATE TABLE ${tables} CASCADE;`);
+    } catch (error) {
+      console.log({ error });
+    }
   }
 }
