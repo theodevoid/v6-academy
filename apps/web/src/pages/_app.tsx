@@ -7,6 +7,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 
 import { Footer } from '~/components/Footer';
 import { ThemeProvider } from '~/components/theme-provider';
+import { SearchBar } from '~/features/home';
 import { AxiosManager } from '~/lib/axios';
 import { queryClient } from '~/lib/react-query';
 import { ApiClientProvider } from '~/providers/ApiClientProvider';
@@ -28,15 +29,18 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApiClientProvider axiosManager={axiosManager}>
       <QueryClientProvider client={queryClient}>
-        <main className={`${inter.variable} ${poppins.variable} font-sans`}>
-          <Head>
-            <title>V6 Academy - Learn to Code the Practical Way</title>
-          </Head>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <Head>
+          <title>V6 Academy - Learn to Code the Practical Way</title>
+        </Head>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <main
+            className={`${inter.variable} ${poppins.variable} mt-8 font-sans`}
+          >
+            <SearchBar />
             <Component {...pageProps} />
             <Footer />
-          </ThemeProvider>
-        </main>
+          </main>
+        </ThemeProvider>
       </QueryClientProvider>
     </ApiClientProvider>
   );

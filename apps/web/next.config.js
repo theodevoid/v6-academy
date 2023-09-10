@@ -9,7 +9,7 @@ const nextConfig = {
       },
     ],
   },
-  transpilePackages: ['@v6-academy/db'],
+  transpilePackages: ['@v6-academy/db', '@v6-academy/dto'],
 };
 
 module.exports = nextConfig;

@@ -18,6 +18,7 @@ export const CourseShowcaseList: React.FC<CourseShowcaseListProps> = ({
         createdDate={course.createdAt}
         title={course.name}
         unitCount={course._count.units}
+        slug={course.slug}
       />
     );
   });

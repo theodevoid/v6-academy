@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { GetCoursesDTO } from '@v6-academy/dto';
 
 import { PaginationService } from '../pagination/pagination.service';
@@ -20,5 +20,12 @@ export class CourseController {
     >(data, {
       count,
     });
+  }
+
+  @Get('/:id')
+  public async getCourseById(@Param('id') id: number) {
+    const course = await this.courseService.getCourseById(id);
+
+    return course;
   }
 }

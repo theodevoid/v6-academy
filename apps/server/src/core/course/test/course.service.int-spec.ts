@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { PrismaService } from '~/lib/prisma.service';
@@ -54,6 +55,22 @@ describe('CourseService', () => {
           slug: 'react-course',
           categoryId: 1,
         });
+      });
+    });
+  });
+
+  describe('getCourseById', () => {
+    it('should return a course', async () => {
+      const course = await courseService.getCourseById(1);
+
+      expect(course.id).toBe(1);
+    });
+
+    describe('given an ID that does not exist', () => {
+      it('should throw a not found error', async () => {
+        await expect(courseService.getCourseById(100)).rejects.toThrow(
+          NotFoundException,
+        );
       });
     });
   });

@@ -17,17 +17,14 @@ export const SearchBar = () => {
   };
 
   return (
-    <div>
-      <div className="flex gap-4">
-        <Button variant="link" className="font-heading font-extrabold">
-          V6 Academy
+    <div className="mb-20 flex justify-between px-4">
+      <Button variant="link" className="font-heading font-extrabold">
+        V6 Academy
+      </Button>
+      <div className="flex gap-2">
+        <Button>
+          <MagnifyingGlassIcon height={20} width={20} />
         </Button>
-        <div className="flex flex-1">
-          <Input className=" rounded-e-none px-6" />
-          <Button className=" rounded-s-none">
-            <MagnifyingGlassIcon height={20} width={20} />
-          </Button>
-        </div>
         <Button onClick={toggleTheme}>
           {theme === 'light' ? <SunIcon /> : <MoonIcon />}
         </Button>

@@ -12,6 +12,7 @@ interface CourseCardProps {
   createdDate: Date;
   price?: number;
   coverImageUrl: string;
+  slug: string;
 }
 
 export const CourseCard: React.FC<CourseCardProps> = ({
@@ -21,9 +22,10 @@ export const CourseCard: React.FC<CourseCardProps> = ({
   createdDate,
   price,
   coverImageUrl,
+  slug,
 }) => {
   return (
-    <Link href="#" className="w-full hover:cursor-pointer ">
+    <Link href={`/learn/${slug}`} className="w-full hover:cursor-pointer ">
       <AspectRatio ratio={16 / 9} className="relative">
         <Image fill src={coverImageUrl} alt={title} className="rounded-md" />
       </AspectRatio>

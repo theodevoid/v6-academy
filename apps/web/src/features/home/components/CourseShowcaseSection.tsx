@@ -2,7 +2,7 @@ import { useGetCoursesQuery } from '../api';
 import { CourseShowcaseList } from './CourseShowcaseList';
 
 export const CourseShowCaseSection = () => {
-  const { data } = useGetCoursesQuery();
+  const { data } = useGetCoursesQuery({ getCoursesDTO: {} });
 
   return (
     <div className="mt-8">
@@ -10,7 +10,7 @@ export const CourseShowCaseSection = () => {
         Nih, course recommended buat lo!
       </h3>
       <div className="mt-4 grid grid-cols-1 gap-8 md:grid-cols-2">
-        <CourseShowcaseList courses={data?.records || []} />
+        <CourseShowcaseList courses={data?.data?.records || []} />
       </div>
     </div>
   );

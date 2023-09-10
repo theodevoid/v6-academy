@@ -1,7 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { Prisma } from '@v6-academy/db';
+import { GetCoursesDTO } from '@v6-academy/dto';
+import { AxiosPromise } from 'axios';
 
 import { PageableResponse } from '~/utils/pagination';
+import { axios } from '~/lib/axios';
+import { ExtractFnReturnType, QueryConfig } from '~/lib/react-query';
 import { useApiClient } from '~/providers/ApiClientProvider';
 
 const courseWithUnitsCountAndAuthor =
@@ -13,6 +17,7 @@ const courseWithUnitsCountAndAuthor =
         },
       },
       author: true,
+      units: true,
     },
   });
 
@@ -20,14 +25,26 @@ export type CourseWithUnitsCountAndAuthor = Prisma.CourseGetPayload<
   typeof courseWithUnitsCountAndAuthor
 >;
 
-export const useGetCoursesQuery = () => {
-  const { api, axios } = useApiClient();
+export const getCourses = (
+  getCoursesDTO: GetCoursesDTO,
+): AxiosPromise<PageableResponse<CourseWithUnitsCountAndAuthor>> => {
+  return axios.get('/courses', { params: getCoursesDTO });
+};
 
-  return useQuery(['courses'], async () => {
-    const courses = await api<PageableResponse<CourseWithUnitsCountAndAuthor>>(
-      axios.get('/courses'),
-    );
+type QueryFnType = typeof getCourses;
 
-    return courses;
+type UseGetCoursesQueryOptions = {
+  config?: QueryConfig<QueryFnType>;
+  getCoursesDTO: GetCoursesDTO;
+};
+
+export const useGetCoursesQuery = ({
+  config,
+  getCoursesDTO,
+}: UseGetCoursesQueryOptions) => {
+  return useQuery<ExtractFnReturnType<QueryFnType>>({
+    ...config,
+    queryKey: ['courses'],
+    queryFn: () => getCourses(getCoursesDTO),
   });
 };

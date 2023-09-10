@@ -26,16 +26,21 @@ model Category {
 }
 
 model Course {
-  id           Int      @id @default(autoincrement())
-  name         String
-  category     Category @relation(fields: [categoryId], references: [id])
-  categoryId   Int
-  units        Unit[]
-  createdAt    DateTime @default(now())
-  slug         String   @unique
-  thumbnailUrl String?
-  author       User?    @relation(fields: [userId], references: [id])
-  userId       Int?
+  id                 Int      @id @default(autoincrement())
+  name               String
+  category           Category @relation(fields: [categoryId], references: [id])
+  categoryId         Int
+  units              Unit[]
+  createdAt          DateTime @default(now())
+  slug               String   @unique
+  thumbnailUrl       String?
+  author             User?    @relation(fields: [userId], references: [id])
+  userId             Int?
+  description        String   @default("")
+  mainLearningPoints String[]
+  prerequisiteNotes  String   @default("")
+  fiatPrice          Int      @default(0)
+  pointsPrice        Int      @default(0)
 }
 
 model Unit {

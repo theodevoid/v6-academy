@@ -22,6 +22,7 @@
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "@v6-academy/db": "^1.0.0",
+    "@v6-academy/dto": "^1.0.0",
     "autoprefixer": "10.4.15",
     "axios": "^1.5.0",
     "class-variance-authority": "^0.7.0",
