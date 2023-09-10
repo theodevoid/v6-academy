@@ -1,10 +1,13 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { VideoPlayer } from '~/components/VideoPlayer';
 import { MaterialsListItem } from '~/features/learn';
 
 const LearnPage = () => {
+  const router = useRouter();
+
   return (
     <main className="min-h-screen">
       <Head>
@@ -17,7 +20,6 @@ const LearnPage = () => {
         </div>
       </div>
       {/* ----- */}
-
       <Tabs className="mt-4 px-4" defaultValue="lectures">
         <TabsList className="flex w-full">
           <TabsTrigger className="flex-1" value="lectures">
