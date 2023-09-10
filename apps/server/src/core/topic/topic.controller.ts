@@ -1,5 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { GetTopicsDTO } from '@v6-academy/dto';
+import { Controller, Get, Param } from '@nestjs/common';
 
 import { TopicService } from './topic.service';
 
@@ -8,9 +7,16 @@ export class TopicController {
   constructor(private readonly topicService: TopicService) {}
 
   @Get('/')
-  public async getTopics(@Query() getTopicsDTO: GetTopicsDTO) {
-    const topics = await this.topicService.getTopics(getTopicsDTO);
+  public async getTopics() {
+    const topics = await this.topicService.getTopics();
 
     return topics;
+  }
+
+  @Get('/:id')
+  public async getTopicById(@Param('id') id: number) {
+    const topic = await this.topicService.getTopicById(id);
+
+    return topic;
   }
 }

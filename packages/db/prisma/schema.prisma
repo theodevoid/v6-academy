@@ -40,7 +40,6 @@ model Unit {
   course    Course   @relation(fields: [courseId], references: [id])
   courseId  Int
   createdAt DateTime @default(now())
-  slug      String   @unique
   topics    Topic[]
 }
 
@@ -51,7 +50,6 @@ model Topic {
   description             String?
   writtenMaterialMarkdown String?
   createdAt               DateTime  @default(now())
-  slug                    String    @unique
   type                    TopicType @default(VIDEO)
   unit                    Unit?     @relation(fields: [unitId], references: [id])
   unitId                  Int?

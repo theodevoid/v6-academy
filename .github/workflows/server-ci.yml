@@ -26,6 +26,12 @@ jobs:
       - name: Lint
         working-directory: apps/server
         run: pnpm run lint:ci
+      - name: Start docker containers
+        working-directory: apps/server
+        run: docker-compose up -d
       - name: Run tests
         working-directory: apps/server
         run: pnpm run test
+      - name: Stop docker containers
+        working-directory: apps/server
+        run: docker-compose down

@@ -2,7 +2,7 @@
   "name": "@v6-academy/dto",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "types": "src/index.ts",
   "scripts": {
     "build": "tsc"

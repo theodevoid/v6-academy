@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@v6-academy/db';
 import { GetCoursesDTO } from '@v6-academy/dto';
 
 import { PrismaService } from '~/lib/prisma.service';
@@ -9,7 +9,7 @@ export class CourseService {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async getCourses(query: GetCoursesDTO) {
-    const whereCondition: Prisma.CourseFindManyArgs['where'] = {
+    const whereCondition: Prisma.CourseWhereInput = {
       slug: query.slug ?? undefined,
     };
 
