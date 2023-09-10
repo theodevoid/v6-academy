@@ -1,6 +1,8 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class GetCoursesDTO {
+import { PaginationQueryParams } from '../pagination';
+
+export class GetCoursesDTO extends PaginationQueryParams {
   @IsString()
   @IsOptional()
   slug?: string;

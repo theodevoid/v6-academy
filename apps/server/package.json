@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prestart": "npx prisma migrate deploy",
-    "predev": "npm run build --prefix ../../packages/db && npx prisma migrate dev && npx prisma generate",
+    "predev": "npm run build --prefix ../../packages/db && npm run build --prefix ../../packages/dto && npx prisma migrate dev && npx prisma generate",
     "postinstall": "npx prisma generate",
     "pretest": "dotenv -e .env.test -- npx prisma migrate reset --force"
   },

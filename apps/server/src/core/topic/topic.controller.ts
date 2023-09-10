@@ -1,16 +1,25 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { GetTopicsDTO } from '@v6-academy/dto';
 
+import { PaginationService } from '../pagination/pagination.service';
 import { TopicService } from './topic.service';
 
 @Controller('topics')
 export class TopicController {
-  constructor(private readonly topicService: TopicService) {}
+  constructor(
+    private readonly topicService: TopicService,
+    private readonly paginationService: PaginationService,
+  ) {}
 
   @Get('/')
-  public async getTopics() {
-    const topics = await this.topicService.getTopics();
+  public async getTopics(@Query() query: GetTopicsDTO) {
+    const { count, data } = await this.topicService.getTopics(query);
 
-    return topics;
+    return this.paginationService.buildPaginationResponse<
+      (typeof data)[number]
+    >(data, {
+      count,
+    });
   }
 
   @Get('/:id')

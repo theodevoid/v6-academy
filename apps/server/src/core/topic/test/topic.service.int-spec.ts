@@ -32,9 +32,10 @@ describe('TopicService', () => {
 
   describe('getTopics', () => {
     it('should return a list of topics', async () => {
-      const topics = await topicService.getTopics();
+      const { count, data } = await topicService.getTopics({});
 
-      expect(topics.length).toBeGreaterThan(0);
+      expect(data.length).toBe(3);
+      expect(count).toBe(3);
     });
   });
 
