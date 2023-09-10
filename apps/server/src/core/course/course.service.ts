@@ -16,6 +16,13 @@ export class CourseService {
     const [courses, count] = await this.prismaService.$transaction([
       this.prismaService.course.findMany({
         where: whereCondition,
+        include: {
+          units: {
+            include: {
+              _count: true,
+            },
+          },
+        },
       }),
       this.prismaService.course.count({
         where: whereCondition,
