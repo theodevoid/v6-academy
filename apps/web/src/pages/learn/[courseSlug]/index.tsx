@@ -21,7 +21,7 @@ interface CoursePageProps {
 
 const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
   return (
-    <main className="container min-h-screen max-w-screen-md">
+    <main className="container flex min-h-screen max-w-screen-md flex-col">
       <h1 className="text-center font-heading text-4xl font-bold uppercase">
         {course.name}
       </h1>
@@ -36,6 +36,10 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
       <p className="mt-10 text-center text-sm text-gray-600 dark:text-gray-400">
         {course.description}
       </p>
+
+      <Button asChild className="mt-8 self-center">
+        <a href="#join-course">Aku mau ikut bang ☝️</a>
+      </Button>
 
       <div className="mt-20 flex flex-col gap-16">
         <SectionContent title="🤔 Apa aja yang bakal dipelajarin?">
@@ -63,7 +67,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
         </div>
       </section>
 
-      <section className="mt-20">
+      <section id="join-course" className="mt-20">
         <h2 className="mb-6 text-center font-heading text-3xl font-bold">
           Gabung course ini
         </h2>
