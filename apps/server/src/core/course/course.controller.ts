@@ -1,22 +1,24 @@
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { GetCoursesDTO } from '@v6-academy/dto';
-import { Response } from 'express';
 
+import { PaginationService } from '../pagination/pagination.service';
 import { CourseService } from './course.service';
 
 @Controller('courses')
 export class CourseController {
-  constructor(private readonly courseService: CourseService) {}
+  constructor(
+    private readonly courseService: CourseService,
+    private readonly paginationService: PaginationService,
+  ) {}
 
   @Get('/')
-  public async getCourses(
-    @Query() query: GetCoursesDTO,
-    @Res() response: Response,
-  ) {
+  public async getCourses(@Query() query: GetCoursesDTO) {
     const { count, data } = await this.courseService.getCourses(query);
 
-    response.setHeader('x-total-count', count);
-
-    return data;
+    return this.paginationService.buildPaginationResponse<
+      (typeof data)[number]
+    >(data, {
+      count,
+    });
   }
 }

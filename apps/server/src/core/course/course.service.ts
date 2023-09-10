@@ -17,11 +17,12 @@ export class CourseService {
       this.prismaService.course.findMany({
         where: whereCondition,
         include: {
-          units: {
-            include: {
-              _count: true,
+          _count: {
+            select: {
+              units: true,
             },
           },
+          author: true,
         },
       }),
       this.prismaService.course.count({
