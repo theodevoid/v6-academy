@@ -7,6 +7,9 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.discordapp.com',
       },
+      {
+        hostname: 'localhost',
+      },
     ],
   },
   transpilePackages: ['@v6-academy/db', '@v6-academy/dto'],
