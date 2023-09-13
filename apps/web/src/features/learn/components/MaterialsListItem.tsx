@@ -30,7 +30,7 @@ export const MaterialsListItem: React.FC<MaterialsListItemProps> = ({
     <Collapsible open={opened}>
       <CollapsibleTrigger
         onClick={toggleCollapsible}
-        className="flex w-full items-center justify-between rounded-t-sm bg-foreground p-4 text-background"
+        className="flex w-full items-center justify-between rounded-t-sm border-b-2 bg-background p-4 pl-0 text-foreground transition-colors hover:bg-gray-200 dark:hover:bg-gray-900"
       >
         <div>
           <p className="font-semibold">{title}</p>
@@ -41,12 +41,15 @@ export const MaterialsListItem: React.FC<MaterialsListItemProps> = ({
         <ChevronDownIcon className={`${opened && 'rotate-180'} transition`} />
       </CollapsibleTrigger>
       <CollapsibleContent className="text-sm">
-        <MaterialsListItemTopic
-          courseSlug="course-slug"
-          slug="test-slug-var"
-          title="Using the `var` keyword"
-          type="VIDEO"
-        />
+        {topics.map((topic) => {
+          return (
+            <MaterialsListItemTopic
+              title={topic.title}
+              type="VIDEO" // TODO: support text-only materials
+              id={topic.id}
+            />
+          );
+        })}
       </CollapsibleContent>
     </Collapsible>
   );

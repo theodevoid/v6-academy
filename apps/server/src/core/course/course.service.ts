@@ -58,7 +58,11 @@ export class CourseService {
       include: {
         author: true,
         category: true,
-        units: true,
+        units: {
+          include: {
+            topics: true,
+          },
+        },
       },
     });
 

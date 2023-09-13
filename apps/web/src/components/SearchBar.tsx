@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import { MagnifyingGlassIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 
 import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
 
 export const SearchBar = () => {
   const { theme, setTheme } = useTheme();
@@ -19,7 +19,7 @@ export const SearchBar = () => {
   return (
     <div className="mb-20 flex justify-between px-4">
       <Button variant="link" className="font-heading font-extrabold">
-        V6 Academy
+        <Link href="/">V6 Academy</Link>
       </Button>
       <div className="flex gap-2">
         <Button>

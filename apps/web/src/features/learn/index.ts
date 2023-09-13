@@ -1,2 +1,2 @@
-export * from './components/MaterialsListItem';
+export * from './components';
 export * from './api';

@@ -43,6 +43,9 @@ export class TopicService {
       where: {
         id,
       },
+      include: {
+        unit: true,
+      },
     });
 
     if (!topic) throw new NotFoundException('topic not found');

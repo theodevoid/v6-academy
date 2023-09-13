@@ -6,8 +6,8 @@ import Head from 'next/head';
 import { QueryClientProvider } from '@tanstack/react-query';
 
 import { Footer } from '~/components/Footer';
+import { SearchBar } from '~/components/SearchBar';
 import { ThemeProvider } from '~/components/theme-provider';
-import { SearchBar } from '~/features/home';
 import { AxiosManager } from '~/lib/axios';
 import { queryClient } from '~/lib/react-query';
 import { ApiClientProvider } from '~/providers/ApiClientProvider';

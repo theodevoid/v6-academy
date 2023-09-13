@@ -25,7 +25,10 @@ export const CourseCard: React.FC<CourseCardProps> = ({
   slug,
 }) => {
   return (
-    <Link href={`/learn/${slug}`} className="w-full hover:cursor-pointer ">
+    <Link
+      href={`/learn/course/${slug}`}
+      className="w-full hover:cursor-pointer"
+    >
       <AspectRatio ratio={16 / 9} className="relative">
         <Image fill src={coverImageUrl} alt={title} className="rounded-md" />
       </AspectRatio>

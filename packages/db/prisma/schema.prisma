@@ -50,6 +50,7 @@ model Unit {
   courseId  Int
   createdAt DateTime @default(now())
   topics    Topic[]
+  order     Int      @default(1)
 }
 
 model Topic {
@@ -62,6 +63,7 @@ model Topic {
   type                    TopicType @default(VIDEO)
   unit                    Unit?     @relation(fields: [unitId], references: [id])
   unitId                  Int?
+  order                   Int       @default(1)
 }
 
 enum TopicType {

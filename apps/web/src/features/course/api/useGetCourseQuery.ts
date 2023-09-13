@@ -9,7 +9,11 @@ const courseDetails = Prisma.validator<Prisma.CourseDefaultArgs>()({
   include: {
     author: true,
     category: true,
-    units: true,
+    units: {
+      include: {
+        topics: true,
+      },
+    },
   },
 });
 

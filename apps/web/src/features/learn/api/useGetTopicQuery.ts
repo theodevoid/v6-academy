@@ -5,11 +5,15 @@ import { AxiosPromise } from 'axios';
 import { axios } from '~/lib/axios';
 import { ExtractFnReturnType, QueryConfig } from '~/lib/react-query';
 
-const topic = Prisma.validator<Prisma.TopicDefaultArgs>()({});
+const topicDetails = Prisma.validator<Prisma.TopicDefaultArgs>()({
+  include: {
+    unit: true,
+  },
+});
 
-export type Topic = Prisma.TopicGetPayload<typeof topic>;
+export type TopicDetails = Prisma.TopicGetPayload<typeof topicDetails>;
 
-export const getTopic = (id: number): AxiosPromise<Topic> => {
+export const getTopic = (id: number): AxiosPromise<TopicDetails> => {
   return axios.get(`/topics/${id}`);
 };
 
