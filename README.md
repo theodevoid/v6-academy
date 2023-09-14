@@ -6,7 +6,7 @@ Started out as my very first project. Now I'm trying to realize it and make it u
 
 ## Features
 
-- [ ] Watch Course Videos
+- [x] Watch Course Videos
 - [ ] Create and sign in accounts
 - [ ] Customize profile
 - [ ] Save courses
