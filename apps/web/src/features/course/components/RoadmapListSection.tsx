@@ -10,6 +10,6 @@ export const RoadmapListSection: React.FC<RoadmapListSectionProps> = ({
   if (!items.length) return null;
 
   return items.map((item, idx) => {
-    return <RoadmapListItem order={idx + 1} title={item} />;
+    return <RoadmapListItem key={idx} order={idx + 1} title={item} />;
   });
 };

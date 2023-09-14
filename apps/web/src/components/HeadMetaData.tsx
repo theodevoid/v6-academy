@@ -9,12 +9,12 @@ export const HeadMetaData: React.FC<{
 }> = ({ title = 'ICX', metaDescription, ogImageUrl = '', pathname = '' }) => {
   const defaultTitle = 'V6 Academy';
 
-  let baseUrl =
+  const baseUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://v6-academy.com';
 
-  let pageUrl = new URL(pathname, baseUrl).toString();
+  const pageUrl = new URL(pathname, baseUrl).toString();
 
   return (
     <Head>

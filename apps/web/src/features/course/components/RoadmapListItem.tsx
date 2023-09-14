@@ -1,5 +1,3 @@
-import { ArrowDownIcon } from '@radix-ui/react-icons';
-
 interface RoadmapListItemProps {
   order: number;
   title: string;

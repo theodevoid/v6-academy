@@ -13,6 +13,7 @@ export const CourseShowcaseList: React.FC<CourseShowcaseListProps> = ({
   return courses.map((course) => {
     return (
       <CourseCard
+        key={course.id}
         author={course.author?.id.toString() || ''}
         coverImageUrl={course.thumbnailUrl || ''}
         createdDate={course.createdAt}

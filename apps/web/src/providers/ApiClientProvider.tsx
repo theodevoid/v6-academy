@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import React, { PropsWithChildren, useCallback } from 'react';
 import { AxiosInstance, AxiosPromise } from 'axios';
 

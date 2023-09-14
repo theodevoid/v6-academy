@@ -44,6 +44,7 @@ export const MaterialsListItem: React.FC<MaterialsListItemProps> = ({
         {topics.map((topic) => {
           return (
             <MaterialsListItemTopic
+              key={topic.id}
               title={topic.title}
               type="VIDEO" // TODO: support text-only materials
               id={topic.id}

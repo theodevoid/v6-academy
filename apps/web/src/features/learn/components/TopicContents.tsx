@@ -22,7 +22,7 @@ export const TopicContents: React.FC<TopicContentsProps> = ({ topic }) => {
           {topic.order}. {topic.title}
         </h1>
         <div
-          className="prose dark:prose-invert border-b-2 border-dashed pb-4"
+          className="prose border-b-2 border-dashed pb-4 dark:prose-invert"
           dangerouslySetInnerHTML={{
             __html: parseMarkdownToHTML(
               topic.writtenMaterialMarkdown ||

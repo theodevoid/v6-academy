@@ -6,7 +6,6 @@ import { AxiosPromise } from 'axios';
 import { PageableResponse } from '~/utils/pagination';
 import { axios } from '~/lib/axios';
 import { ExtractFnReturnType, QueryConfig } from '~/lib/react-query';
-import { useApiClient } from '~/providers/ApiClientProvider';
 
 const courseWithUnitsCountAndAuthor =
   Prisma.validator<Prisma.CourseDefaultArgs>()({

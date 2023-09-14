@@ -11,6 +11,7 @@ export const MaterialsList: React.FC<MaterialsListProps> = ({ units }) => {
   return units.map((unit) => {
     return (
       <MaterialsListItem
+        key={unit.id}
         title={unit.title}
         topicCount={unit.topics.length}
         topics={unit.topics}
