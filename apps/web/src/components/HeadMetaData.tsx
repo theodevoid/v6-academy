@@ -7,7 +7,7 @@ export const HeadMetaData: React.FC<{
   ogImageUrl?: string;
   pathname?: string;
 }> = ({
-  title = 'ICX',
+  title = 'Suplemen belajar lo, buat ilmu tech industry.',
   metaDescription,
   ogImageUrl = 'https://cdn.discordapp.com/attachments/1050790741334569091/1151943122117480558/V6_Academy_Banner_Assets.png',
   pathname = '',
