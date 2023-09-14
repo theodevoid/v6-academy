@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  password  String
-  comments  Comment[]
-  createdAt DateTime  @default(now())
-  Course    Course[]
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  password     String
+  comments     Comment[]
+  createdAt    DateTime       @default(now())
+  Course       Course[]
+  WatchHistory WatchHistory[]
 }
 
 model Category {
@@ -26,21 +27,22 @@ model Category {
 }
 
 model Course {
-  id                 Int      @id @default(autoincrement())
+  id                 Int            @id @default(autoincrement())
   name               String
-  category           Category @relation(fields: [categoryId], references: [id])
+  category           Category       @relation(fields: [categoryId], references: [id])
   categoryId         Int
   units              Unit[]
-  createdAt          DateTime @default(now())
-  slug               String   @unique
+  createdAt          DateTime       @default(now())
+  slug               String         @unique
   thumbnailUrl       String?
-  author             User?    @relation(fields: [userId], references: [id])
+  author             User?          @relation(fields: [userId], references: [id])
   userId             Int?
-  description        String   @default("")
+  description        String         @default("")
   mainLearningPoints String[]
-  prerequisiteNotes  String   @default("")
-  fiatPrice          Int      @default(0)
-  pointsPrice        Int      @default(0)
+  prerequisiteNotes  String         @default("")
+  fiatPrice          Int            @default(0)
+  pointsPrice        Int            @default(0)
+  WatchHistory       WatchHistory[]
 }
 
 model Unit {
@@ -54,16 +56,18 @@ model Unit {
 }
 
 model Topic {
-  id                      Int       @id @default(autoincrement())
+  id                      Int            @id @default(autoincrement())
   title                   String
   videoUrl                String?
   description             String?
   writtenMaterialMarkdown String?
-  createdAt               DateTime  @default(now())
-  type                    TopicType @default(VIDEO)
-  unit                    Unit?     @relation(fields: [unitId], references: [id])
+  createdAt               DateTime       @default(now())
+  type                    TopicType      @default(VIDEO)
+  unit                    Unit?          @relation(fields: [unitId], references: [id])
   unitId                  Int?
-  order                   Int       @default(1)
+  order                   Int            @default(1)
+  isFree                  Boolean?       @default(false)
+  WatchHistory            WatchHistory[]
 }
 
 enum TopicType {
@@ -77,4 +81,15 @@ model Comment {
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   createdAt DateTime @default(now())
+}
+
+model WatchHistory {
+  id            Int      @id @default(autoincrement())
+  user          User     @relation(fields: [userId], references: [id])
+  topic         Topic    @relation(fields: [topicId], references: [id])
+  course        Course   @relation(fields: [courseId], references: [id])
+  userId        Int
+  topicId       Int
+  courseId      Int
+  lastWatchedAt DateTime @default(now())
 }

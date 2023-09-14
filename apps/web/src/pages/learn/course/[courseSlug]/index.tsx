@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { toRupiah } from '~/utils/format';
@@ -49,9 +50,16 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
           {course.description}
         </p>
 
-        <Button asChild className="mt-8 self-center">
-          <a href="#join-course">Aku mau ikut bang ☝️</a>
-        </Button>
+        <div className="mt-8 flex flex-col justify-center gap-4 lg:flex-row">
+          <Button asChild>
+            <a href="#join-course">Aku mau ikut bang ☝️</a>
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link href={`/learn-redirect/${course.id}/`}>
+              Mau liat-liat dulu 👀
+            </Link>
+          </Button>
+        </div>
 
         <div className="mt-20 flex flex-col gap-16">
           <SectionContent title="🤔 Apa aja yang bakal dipelajarin?">

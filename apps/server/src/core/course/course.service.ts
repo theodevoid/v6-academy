@@ -60,7 +60,14 @@ export class CourseService {
         category: true,
         units: {
           include: {
-            topics: true,
+            topics: {
+              orderBy: {
+                order: 'asc',
+              },
+            },
+          },
+          orderBy: {
+            order: 'asc',
           },
         },
       },
