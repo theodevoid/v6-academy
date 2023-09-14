@@ -1,4 +1,4 @@
-import { CourseShowCaseSection, HeroSection, SearchBar } from '~/features/home';
+import { CourseShowCaseSection, HeroSection } from '~/features/home';
 
 export default function Home() {
   return (
