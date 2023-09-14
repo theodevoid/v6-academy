@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  password     String
+  comments     Comment[]
+  createdAt    DateTime       @default(now())
+  Course       Course[]
+  WatchHistory WatchHistory[]
+}
+
+model Category {
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Course[]
+}
+
+model Course {
+  id                 Int            @id @default(autoincrement())
+  name               String
+  category           Category       @relation(fields: [categoryId], references: [id])
+  categoryId         Int
+  units              Unit[]
+  createdAt          DateTime       @default(now())
+  slug               String         @unique
+  thumbnailUrl       String?
+  author             User?          @relation(fields: [userId], references: [id])
+  userId             Int?
+  description        String         @default("")
+  mainLearningPoints String[]
+  prerequisiteNotes  String         @default("")
+  fiatPrice          Int            @default(0)
+  pointsPrice        Int            @default(0)
+  WatchHistory       WatchHistory[]
+}
+
+model Unit {
+  id        Int      @id @default(autoincrement())
+  title     String
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  Int
+  createdAt DateTime @default(now())
+  topics    Topic[]
+  order     Int      @default(1)
+}
+
+model Topic {
+  id                      Int            @id @default(autoincrement())
+  title                   String
+  videoUrl                String?
+  description             String?
+  writtenMaterialMarkdown String?
+  createdAt               DateTime       @default(now())
+  type                    TopicType      @default(VIDEO)
+  unit                    Unit?          @relation(fields: [unitId], references: [id])
+  unitId                  Int?
+  order                   Int            @default(1)
+  isFree                  Boolean?       @default(false)
+  WatchHistory            WatchHistory[]
+}
+
+enum TopicType {
+  VIDEO
+  TEXT
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  body      String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+}
+
+model WatchHistory {
+  id            Int      @id @default(autoincrement())
+  user          User     @relation(fields: [userId], references: [id])
+  topic         Topic    @relation(fields: [topicId], references: [id])
+  course        Course   @relation(fields: [courseId], references: [id])
+  userId        Int
+  topicId       Int
+  courseId      Int
+  lastWatchedAt DateTime @default(now())
+}

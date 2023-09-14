@@ -1,10 +1,9 @@
-import { CourseShowCaseSection, HeroSection, SearchBar } from '~/features/home';
+import { CourseShowCaseSection, HeroSection } from '~/features/home';
 
 export default function Home() {
   return (
     <>
-      <main className="container my-8 max-w-screen-md px-4">
-        <SearchBar />
+      <main className="container max-w-screen-md px-4">
         <HeroSection />
         <CourseShowCaseSection />
       </main>

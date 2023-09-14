@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Topic" ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 1;
+
+-- AlterTable
+ALTER TABLE "Unit" ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 1;
