@@ -6,7 +6,12 @@ export const HeadMetaData: React.FC<{
   metaDescription?: string;
   ogImageUrl?: string;
   pathname?: string;
-}> = ({ title = 'ICX', metaDescription, ogImageUrl = '', pathname = '' }) => {
+}> = ({
+  title = 'ICX',
+  metaDescription,
+  ogImageUrl = 'https://cdn.discordapp.com/attachments/1050790741334569091/1151943122117480558/V6_Academy_Banner_Assets.png',
+  pathname = '',
+}) => {
   const defaultTitle = 'V6 Academy';
 
   const baseUrl =
