@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { Prisma } from '@prisma/client';
 import { Profile, Strategy } from 'passport-github';
 
 import { UserService } from '~/core/user/user.service';
@@ -37,35 +36,12 @@ export class GithubOauthStrategy extends PassportStrategy(Strategy, 'github') {
 
     const { id, emails } = profile;
 
-    console.log(profile);
-
-    const userByGithubId = await this.userService.getUser({
-      githubId: id,
-    });
-
-    if (userByGithubId) {
-      return userByGithubId;
-    }
-
-    const userPayload: Prisma.UserCreateInput = {
-      githubId: id,
-    };
-
-    if (emails?.length) {
-      const userByEmail = await this.userService.getUser({
-        email: emails[0].value,
-      });
-
-      if (!userByEmail) {
-        userPayload.email = emails[0].value;
-      }
-    }
-
-    const registeredUser = await this.authService.register(userPayload);
+    const registeredUser = await this.authService.signInWithGithub(
+      id,
+      emails?.length ? emails[0].value : undefined,
+    );
 
     if (!registeredUser) {
-      // TODO Depending on the concrete implementation of findOrCreate(), throwing the
-      // UnauthorizedException here might not make sense...
       throw new UnauthorizedException();
     }
     return registeredUser;

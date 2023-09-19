@@ -46,35 +46,56 @@ export class AuthService {
   }
 
   public async register(user: Prisma.UserCreateInput) {
-    if (!user.githubId) {
-      const userWithEmailIsRegistered = await this.userService.getUser({
-        email: user.email,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...newUser } = await this.userService.createUser(user);
+
+    return newUser;
+  }
+
+  public async registerWithEmailAndPassword(email: string, password: string) {
+    const userWithEmailIsRegistered = await this.userService.getUser({
+      email,
+    });
+
+    if (userWithEmailIsRegistered) {
+      throw new UnprocessableEntityException(
+        'email has already been registered',
+      );
+    }
+
+    const hashedPassword = await hash(password, config.bcryptSaltRounds);
+
+    return await this.register({ email, password: hashedPassword });
+  }
+
+  public async signInWithGithub(
+    githubId: string,
+    email?: string,
+  ): Promise<Omit<User, 'password'>> {
+    const userByGithubId = await this.userService.getUser({
+      githubId,
+    });
+
+    if (userByGithubId) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...user } = userByGithubId;
+      return user;
+    }
+
+    const userRegisterPayload: Prisma.UserCreateInput = {
+      githubId,
+    };
+
+    if (email) {
+      const userByEmail = await this.userService.getUser({
+        email,
       });
 
-      if (userWithEmailIsRegistered) {
-        throw new UnprocessableEntityException(
-          'email has already been registered',
-        );
+      if (!userByEmail) {
+        userRegisterPayload.email = email;
       }
     }
 
-    const userPayload: Prisma.UserCreateInput = {
-      email: user.email,
-    };
-
-    if (user.githubId) {
-      userPayload.githubId = user.githubId;
-    }
-
-    if (user.password) {
-      const hashedPassword = await hash(user.password, config.bcryptSaltRounds);
-      userPayload.password = hashedPassword;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...newUser } =
-      await this.userService.createUser(userPayload);
-
-    return newUser;
+    return await this.register(userRegisterPayload);
   }
 }
