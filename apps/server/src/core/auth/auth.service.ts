@@ -23,6 +23,8 @@ export class AuthService {
 
     if (!user) throw new NotFoundException('user not found');
 
+    if (!user.password) throw new UnauthorizedException();
+
     const passwordIsValid = await compare(passwordInput, user.password);
 
     if (!passwordIsValid) {
@@ -44,23 +46,34 @@ export class AuthService {
   }
 
   public async register(user: Prisma.UserCreateInput) {
-    const userWithEmailIsRegistered = await this.userService.getUser({
-      email: user.email,
-    });
+    if (!user.githubId) {
+      const userWithEmailIsRegistered = await this.userService.getUser({
+        email: user.email,
+      });
 
-    if (userWithEmailIsRegistered) {
-      throw new UnprocessableEntityException(
-        'email has already been registered',
-      );
+      if (userWithEmailIsRegistered) {
+        throw new UnprocessableEntityException(
+          'email has already been registered',
+        );
+      }
     }
 
-    const hashedPassword = await hash(user.password, config.bcryptSaltRounds);
+    const userPayload: Prisma.UserCreateInput = {
+      email: user.email,
+    };
+
+    if (user.githubId) {
+      userPayload.githubId = user.githubId;
+    }
+
+    if (user.password) {
+      const hashedPassword = await hash(user.password, config.bcryptSaltRounds);
+      userPayload.password = hashedPassword;
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...newUser } = await this.userService.createUser({
-      email: user.email,
-      password: hashedPassword,
-    });
+    const { password, ...newUser } =
+      await this.userService.createUser(userPayload);
 
     return newUser;
   }

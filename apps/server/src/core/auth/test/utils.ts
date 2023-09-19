@@ -7,8 +7,8 @@ export const mockAuthService = {
   register: jest.fn().mockImplementation((args: Prisma.UserCreateInput) => {
     return Promise.resolve<User>({
       ...oneUserMockData,
-      email: args.email,
-      password: args.password,
+      email: args.email as string,
+      password: args.password as string,
     });
   }),
   login: jest.fn().mockResolvedValue({
@@ -22,6 +22,7 @@ export const mockAuthService = {
           createdAt: new Date(),
           email,
           id: 1,
+          githubId: '1',
         });
 
       throw new UnauthorizedException();

@@ -143,6 +143,4 @@ export class AxiosManager {
 }
 
 // will be used in SSR API Requests
-export const axios = Axios.create({
-  baseURL: env.NEXT_PUBLIC_API_URL,
-});
+export const axios = new AxiosManager().axios;
