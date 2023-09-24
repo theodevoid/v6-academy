@@ -5,15 +5,15 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
-    "db:generate": "pnpm with-env prisma generate",
-    "db:push": "pnpm with-env prisma db push --skip-generate",
-    "dev": "pnpm with-env prisma studio --port 5556",
-    "with-env": "dotenv -e ../../.env --",
+    "db:generate": "npx prisma generate",
+    "db:push": "npx prisma db push --skip-generate",
     "build": "tsc && npx prisma generate"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "5.1.1"
+    "@prisma/client": "5.1.1",
+    "dotenv-cli": "^7.3.0",
+    "prisma": "5.1.1"
   }
 }

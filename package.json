@@ -16,10 +16,5 @@
     "prettier-plugin-tailwindcss": "^0.5.3",
     "turbo": "latest"
   },
-  "packageManager": "npm@9.5.1",
-  "name": "v6-academy",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ]
+  "name": "v6-academy"
 }

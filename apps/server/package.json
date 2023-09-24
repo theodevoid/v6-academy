@@ -21,7 +21,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prestart": "npx prisma migrate deploy",
     "predev": "npm run build --prefix ../../packages/db && npm run build --prefix ../../packages/dto && npx prisma migrate dev && npx prisma generate",
-    "postinstall": "npx prisma generate",
     "pretest": "dotenv -e .env.test -- npx prisma migrate reset --force"
   },
   "dependencies": {
@@ -33,8 +32,8 @@
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "5.1.1",
     "@supabase/supabase-js": "^2.33.2",
-    "@v6-academy/db": "*",
-    "@v6-academy/dto": "^1.0.0",
+    "@v6-academy/db": "workspace:*",
+    "@v6-academy/dto": "workspace:*",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",

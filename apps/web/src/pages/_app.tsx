@@ -4,13 +4,13 @@ import type { AppProps } from 'next/app';
 import { Inter, Poppins } from 'next/font/google';
 import Head from 'next/head';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { ApiClientProvider } from '@v6-academy/api';
 
 import { Footer } from '~/components/Footer';
 import { SearchBar } from '~/components/SearchBar';
 import { ThemeProvider } from '~/components/theme-provider';
 import { AxiosManager } from '~/lib/axios';
 import { queryClient } from '~/lib/react-query';
-import { ApiClientProvider } from '~/providers/ApiClientProvider';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -27,7 +27,7 @@ const axiosManager = new AxiosManager();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ApiClientProvider axiosManager={axiosManager}>
+    <ApiClientProvider axiosInstance={axiosManager.axios}>
       <QueryClientProvider client={queryClient}>
         <Head>
           <title>V6 Academy - Learn to Code the Practical Way</title>
