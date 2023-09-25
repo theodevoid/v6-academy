@@ -1,22 +1,17 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { User as UserModel } from '@prisma/client';
+import { AuthUser } from '@supabase/supabase-js';
 
-import { JwtAuthGuard } from '../auth/jwt-auth-guard';
+// import { JwtAuthGuard } from '../auth/jwt-auth-guard';
+import { SupabaseGuard } from '../auth/supabase/supabase.guard';
 import { User } from './user.decorator';
-import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
-  @Get('/')
-  public async getUsers() {
-    return await this.userService.getUsers();
-  }
-
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(SupabaseGuard)
   @Get('/test')
-  testUsers(@User() user: UserModel) {
+  testUsers(@User() user: AuthUser) {
+    console.log(user);
+
     return user;
   }
 }

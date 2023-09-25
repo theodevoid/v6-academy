@@ -1,4 +1,5 @@
-import { useGetCoursesQuery } from '../api';
+import { useGetCoursesQuery } from '@v6-academy/api';
+
 import { CourseShowcaseList } from './CourseShowcaseList';
 
 export const CourseShowCaseSection = () => {

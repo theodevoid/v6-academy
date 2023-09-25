@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { Prisma } from '@v6-academy/db';
 import defaultAxios, { AxiosPromise } from 'axios';
-import { ApiFn, ExtractFnReturnType, QueryConfig } from 'lib/react-query';
-import { useApiClient } from 'providers';
+
+import { ApiFn, ExtractFnReturnType, QueryConfig } from '~/lib/react-query';
+import { useApiClient } from '~/providers';
 
 const courseDetails = Prisma.validator<Prisma.CourseDefaultArgs>()({
   include: {

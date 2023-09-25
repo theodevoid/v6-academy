@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { CourseWithUnitsCountAndAuthor, getCourses } from '@v6-academy/api';
 
 import { toRupiah } from '~/utils/format';
 import { HeadMetaData } from '~/components/HeadMetaData';
@@ -16,7 +17,7 @@ import {
   CardTitle,
 } from '~/components/ui/card';
 import { RoadmapListSection, SectionContent } from '~/features/course';
-import { CourseWithUnitsCountAndAuthor, getCourses } from '~/features/home';
+import { axios } from '~/lib/axios';
 
 interface CoursePageProps {
   course: CourseWithUnitsCountAndAuthor;
@@ -146,9 +147,12 @@ export default CoursePage;
 export const getServerSideProps: GetServerSideProps<CoursePageProps> = async (
   context,
 ) => {
-  const { data } = await getCourses({
-    slug: context.query.courseSlug as string,
-  });
+  const { data } = await getCourses(
+    {
+      slug: context.query.courseSlug as string,
+    },
+    { axios },
+  );
 
   return {
     props: {

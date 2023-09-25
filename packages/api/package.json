@@ -22,6 +22,7 @@
   "dependencies": {
     "@tanstack/react-query": "4.35.3",
     "@v6-academy/db": "^1.0.0",
+    "@v6-academy/dto": "workspace:^",
     "axios": "^1.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

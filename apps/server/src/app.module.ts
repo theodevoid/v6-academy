@@ -1,20 +1,14 @@
 import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
 
-import { AuthModule } from './core/auth/auth.module';
-import { GithubOauthModule } from './core/auth/github/github-oauth.module';
+import { SupabaseModule } from './core/auth/supabase/supabase.module';
 import { CourseModule } from './core/course/course.module';
 import { TopicModule } from './core/topic/topic.module';
-import { UserModule } from './core/user/user.module';
+import { UserController } from './core/user/user.controller';
 
 @Module({
-  imports: [
-    UserModule,
-    AuthModule,
-    TopicModule,
-    CourseModule,
-    GithubOauthModule,
-  ],
-  controllers: [],
+  imports: [TopicModule, CourseModule, PassportModule, SupabaseModule],
+  controllers: [UserController],
   providers: [],
 })
 export class AppModule {}

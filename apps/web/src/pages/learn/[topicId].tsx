@@ -1,14 +1,13 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
+import { useGetCourseQuery, useGetTopicQuery } from '@v6-academy/api';
 
 import { HeadMetaData } from '~/components/HeadMetaData';
 import { ScrollArea } from '~/components/ui/scroll-area';
-import { useGetCourseQuery } from '~/features/course';
 import {
   MaterialsList,
   ScrollToCourseUnitsButton,
   TopicContents,
-  useGetTopicQuery,
 } from '~/features/learn';
 
 const LearnPage = () => {

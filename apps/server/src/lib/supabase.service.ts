@@ -1,28 +1,41 @@
 import {
+  Inject,
   Injectable,
   InternalServerErrorException,
-  Logger,
   Scope,
 } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { Request } from 'express';
+import { ExtractJwt } from 'passport-jwt';
 
 import { config } from '~/config';
 
 @Injectable({ scope: Scope.REQUEST })
-export class Supabase {
-  private readonly logger = new Logger(Supabase.name);
+export class SupabaseService {
   private clientInstance: SupabaseClient;
 
+  constructor(@Inject(REQUEST) private readonly request: Request) {}
+
   public getClient() {
-    this.logger.log('getting supabase client...');
     if (this.clientInstance) {
-      this.logger.log('client exists - returning for current Scope.REQUEST');
       return this.clientInstance;
     }
 
-    this.logger.log('initialising new supabase client for new Scope.REQUEST');
-    config;
-    this.clientInstance = createClient(config.supabaseUrl, config.supabaseKey);
+    console.log(this.request.headers.authorization);
+
+    this.clientInstance = createClient(config.supabaseUrl, config.supabaseKey, {
+      auth: {
+        persistSession: false,
+      },
+      global: {
+        headers: {
+          Authorization: `Bearer ${ExtractJwt.fromAuthHeaderAsBearerToken()(
+            this.request,
+          )}`,
+        },
+      },
+    });
 
     return this.clientInstance;
   }
@@ -32,8 +45,8 @@ export class Supabase {
     filePath: string,
     file: any,
   ) {
-    const { data, error } = await this.clientInstance.storage
-      .from(bucketName)
+    const { data, error } = await this.getClient()
+      .storage.from(bucketName)
       .upload(filePath, file);
 
     if (error) throw new InternalServerErrorException('upload failed');

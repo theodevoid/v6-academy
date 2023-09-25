@@ -92,6 +92,9 @@ importers:
       passport-local:
         specifier: ^1.0.0
         version: 1.0.0
+      passport-strategy:
+        specifier: ^1.0.0
+        version: 1.0.0
       prisma:
         specifier: ^5.1.1
         version: 5.1.1
@@ -343,6 +346,9 @@ importers:
       '@v6-academy/db':
         specifier: ^1.0.0
         version: link:../db
+      '@v6-academy/dto':
+        specifier: workspace:^
+        version: link:../dto
       axios:
         specifier: ^1.5.0
         version: 1.5.0
@@ -392,6 +398,10 @@ importers:
       class-validator:
         specifier: ^0.14.0
         version: 0.14.0
+    devDependencies:
+      typescript:
+        specifier: 5.1.3
+        version: 5.1.3
 
   packages/eslint-config-custom:
     dependencies:

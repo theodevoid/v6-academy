@@ -143,4 +143,4 @@ export class AxiosManager {
 }
 
 // will be used in SSR API Requests
-export const axios = new AxiosManager().axios;
+export const { axios, axiosWithAuth } = new AxiosManager();
